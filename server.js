@@ -3,7 +3,12 @@ const app = express()
 
 const dbconfig = require('./db')
 
-app.get("/", (req, res) => res.send("Hello World!"));
+
+const roomsRoute = require('./routes/roomsRoute')
+
+
+app.use('/api/rooms', roomsRoute)
+
 
 const port = process.env.PORT || 5000;
 
