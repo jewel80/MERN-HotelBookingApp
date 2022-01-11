@@ -1,5 +1,5 @@
-import React, { useState , useEffect } from "react";
-import { Modal, Carousel } from "react-bootstrap";
+import React, { useState } from "react";
+import { Carousel, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
@@ -24,6 +24,10 @@ function Room({room}) {
                 <p><b>Type : {room.type}</b></p>
 
                 <div style={{ float: "right" }}>
+
+                <Link to={`/book/${room._id}`}>
+                    <button className="btn btn-dark m-2">Book Now</button>
+                </Link>
                 
                 {/* {(fromdate && todate) && (<Link to={`/book/${room._id}/${fromdate}/${todate}`}>
                     <button className="btn btn-dark m-2">Book Now</button>
