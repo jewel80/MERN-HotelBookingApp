@@ -38,12 +38,40 @@ function Bookingscreen({ match }) {
     }
   }, []);
 
-  async function tokenHander(token) {
-    console.log(token);
+  // async function tokenHander(token) {
+  //   console.log(token);
+  //   const bookingDetails = {
+  //     token,
+  //     user: JSON.parse(localStorage.getItem("currentUser")),
+  //     room,
+  //     fromdate,
+  //     todate,
+  //     totalDays,
+  //     totalAmount,
+  //   };
+
+  //   try {
+  //     setloading(true);
+  //     const result = await axios.post("/api/bookings/bookroom", bookingDetails);
+  //     setloading(false);
+  //     Swal.fire(
+  //       "Congrats",
+  //       "Your Room has booked succeessfully",
+  //       "success"
+  //     ).then((result) => {
+  //       window.location.href = "/profile";
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     setloading(false);
+  //     Swal.fire("Oops", "Something went wrong , please try later", "error");
+  //   }
+  // }
+
+  async function bookRoom(){
     const bookingDetails = {
-      token,
-      user: JSON.parse(localStorage.getItem("currentUser")),
       room,
+      userid: JSON.parse(localStorage.getItem("currentUser")),
       fromdate,
       todate,
       totalDays,
@@ -51,20 +79,9 @@ function Bookingscreen({ match }) {
     };
 
     try {
-      setloading(true);
-      const result = await axios.post("/api/bookings/bookroom", bookingDetails);
-      setloading(false);
-      Swal.fire(
-        "Congrats",
-        "Your Room has booked succeessfully",
-        "success"
-      ).then((result) => {
-        window.location.href = "/profile";
-      });
+      const result = await axios.post('/api/bookings/bookroom', bookingDetails)
     } catch (error) {
-      console.log(error);
-      setloading(false);
-      Swal.fire("Oops", "Something went wrong , please try later", "error");
+      console.log(error)
     }
   }
 
@@ -90,8 +107,8 @@ function Bookingscreen({ match }) {
               <hr />
 
               <p>
-                <b>Name</b> :{" "} jewel
-                {/* {JSON.parse(localStorage.getItem("currentUser")).name} */}
+                <b>Name</b> :{" "} 
+                {JSON.parse(localStorage.getItem("currentUser")).name}
               </p>
               <p>
                 <b>From Date</b> : {match.params.fromdate}
@@ -119,7 +136,9 @@ function Bookingscreen({ match }) {
                 <b>Total Amount : {totalAmount} /-</b>
               </h1>
 
-              <StripeCheckout
+              <button className="btn btn-primary" onClick={bookRoom}>Pay Now</button>
+
+              {/* <StripeCheckout
                 amount={totalAmount * 100}
                 shippingAddress
                 token={tokenHander}
@@ -127,7 +146,7 @@ function Bookingscreen({ match }) {
                 currency="INR"
               >
                 <button className="btn btn-primary">Pay Now</button>
-              </StripeCheckout>
+              </StripeCheckout> */}
             </div>
           </div>
         </div>
