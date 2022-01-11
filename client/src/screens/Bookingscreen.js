@@ -15,11 +15,13 @@ function Bookingscreen({ match }) {
   const [error, seterror] = useState(false);
   const [success, setsuccess] = useState(false);
   const [room, setroom] = useState();
+
   const roomid = match.params.roomid;
   const fromdate = moment(match.params.fromdate, "DD-MM-YYYY");
   const todate = moment(match.params.todate, "DD-MM-YYYY");
   const totalDays = moment.duration(todate.diff(fromdate)).asDays() + 1;
   const [totalAmount, settotalAmount] = useState();
+  console.log(totalDays)
   useEffect(async () => {
     try {
       setloading(true);
