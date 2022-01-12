@@ -1,10 +1,10 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import Swal from "sweetalert2";
 import Error from "../components/Error";
 import Loader from "../components/Loader";
 
@@ -21,7 +21,7 @@ function Bookingscreen({ match }) {
   const todate = moment(match.params.todate, "DD-MM-YYYY");
   const totalDays = moment.duration(todate.diff(fromdate)).asDays() + 1;
   const [totalAmount, settotalAmount] = useState();
-  console.log(totalDays)
+  console.log(totalDays);
   useEffect(async () => {
     try {
       setloading(true);
@@ -38,40 +38,12 @@ function Bookingscreen({ match }) {
     }
   }, []);
 
-  // async function tokenHander(token) {
-  //   console.log(token);
-  //   const bookingDetails = {
-  //     token,
-  //     user: JSON.parse(localStorage.getItem("currentUser")),
-  //     room,
-  //     fromdate,
-  //     todate,
-  //     totalDays,
-  //     totalAmount,
-  //   };
-
-  //   try {
-  //     setloading(true);
-  //     const result = await axios.post("/api/bookings/bookroom", bookingDetails);
-  //     setloading(false);
-  //     Swal.fire(
-  //       "Congrats",
-  //       "Your Room has booked succeessfully",
-  //       "success"
-  //     ).then((result) => {
-  //       window.location.href = "/profile";
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     setloading(false);
-  //     Swal.fire("Oops", "Something went wrong , please try later", "error");
-  //   }
-  // }
-
-  async function bookRoom(){
+  async function onToken(token) {
+    console.log(token);
     const bookingDetails = {
+      token,
+      user: JSON.parse(localStorage.getItem("currentUser")),
       room,
-      userid: JSON.parse(localStorage.getItem("currentUser")),
       fromdate,
       todate,
       totalDays,
@@ -79,11 +51,26 @@ function Bookingscreen({ match }) {
     };
 
     try {
-      const result = await axios.post('/api/bookings/bookroom', bookingDetails)
+      setloading(true);
+      const result = await axios.post("/api/bookings/bookroom", bookingDetails);
+      setloading(false);
+      Swal.fire(
+        "Congrats",
+        "Your Room has booked succeessfully",
+        "success"
+      ).then((result) => {
+        window.location.href = "/profile";
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      setloading(false);
+      Swal.fire("Oops", "Something went wrong , please try later", "error");
     }
   }
+
+ 
+
+  
 
   return (
     <div className="m-5">
@@ -107,7 +94,7 @@ function Bookingscreen({ match }) {
               <hr />
 
               <p>
-                <b>Name</b> :{" "} 
+                <b>Name</b> :{" "}
                 {JSON.parse(localStorage.getItem("currentUser")).name}
               </p>
               <p>
@@ -136,17 +123,16 @@ function Bookingscreen({ match }) {
                 <b>Total Amount : {totalAmount} /-</b>
               </h1>
 
-              <button className="btn btn-primary" onClick={bookRoom}>Pay Now</button>
-
-              {/* <StripeCheckout
+              
+              <StripeCheckout
                 amount={totalAmount * 100}
                 shippingAddress
-                token={tokenHander}
+                token={onToken}
                 stripeKey="pk_test_51IYnC0SIR2AbPxU0TMStZwFUoaDZle9yXVygpVIzg36LdpO8aSG8B9j2C0AikiQw2YyCI8n4faFYQI5uG3Nk5EGQ00lCfjXYvZ"
                 currency="INR"
               >
                 <button className="btn btn-primary">Pay Now</button>
-              </StripeCheckout> */}
+              </StripeCheckout>
             </div>
           </div>
         </div>
