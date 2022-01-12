@@ -71,4 +71,23 @@ router.post("/bookroom", async (req, res) => {
   }
 });
 
+router.post("/getuserbookings", async (req, res) => {
+  const { userid } = req.body;
+  try {
+    const bookings = await Booking.find({ userid: userid }).sort({ _id: -1 });
+    res.send(bookings);
+  } catch (error) {
+    return res.status(400).json({ message: "Something went wrong" });
+  }
+});
+
+router.get("/getallbookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find({});
+    res.send(bookings);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
 module.exports = router;

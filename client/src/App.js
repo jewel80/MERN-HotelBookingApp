@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Bookingscreen from './screens/Bookingscreen';
 import Homescreen from './screens/Homescreen';
 import Loginscreen from "./screens/Loginscreen";
+import Profilescreen from "./screens/Profilescreen";
 import Registerscreen from "./screens/Registerscreen";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" component={Registerscreen} />
         <Route path="/home" exact component={Homescreen} />
         <Route path="/book/:roomid/:fromdate/:todate" component={Bookingscreen}/>
+        <Route path="/profile" component={Profilescreen}/>
       </BrowserRouter>
     </div>
   );
