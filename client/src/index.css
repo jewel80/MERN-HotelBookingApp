@@ -40,7 +40,7 @@ h1{
   height: 450px !important;
   overflow-y: auto;
 }
-input , .ant-picker {
+input ,select, .ant-picker {
   box-shadow: none !important;
   border: 2px solid black !important;
   width: 100% !important;

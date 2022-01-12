@@ -82,9 +82,7 @@ function Homescreen() {
   function filterByType(e) {
     settype(e);
     if (e !== "all") {
-      const dupdate = duplicatehotes.filter((room) =>
-        room.type.toLowerCase().includes(e.toLowerCase())
-      );
+      const dupdate = duplicatehotes.filter(room =>room.type.toLowerCase() === e.toLowerCase())
       sethotels(dupdate);
     } else {
       sethotels(duplicatehotes);
