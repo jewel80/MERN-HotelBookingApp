@@ -57,7 +57,7 @@ function Bookingscreen({ match }) {
         "Your Room has booked succeessfully",
         "success"
       ).then((result) => {
-        window.location.href = "/booking";
+        window.location.href = "/profile";
       });
     } catch (error) {
       console.log(error);

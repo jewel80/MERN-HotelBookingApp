@@ -25,38 +25,32 @@ function Navbar() {
           <span class="navbar-toggler-icon"><i className='fa fa-bars' style={{color: 'white'}}></i></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
-
-         
-
-
           <ul class="navbar-nav ml-auto">
-
-          {localStorage.getItem('currentUser') ? (
-            <div class="dropdown mr-5">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user" aria-hidden="true"></i>  {JSON.parse(localStorage.getItem('currentUser')).name} 
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/profile">Profile</a>
-              <a class="dropdown-item" href="#" onClick={logout}>Logout</a>
+            {localStorage.getItem('currentUser') ? (
+              <div class="dropdown mr-5">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user" aria-hidden="true"></i>  {JSON.parse(localStorage.getItem('currentUser')).name} 
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/profile">Profile</a>
+                <a class="dropdown-item" href="#" onClick={logout}>Logout</a>
+              </div>
             </div>
-          </div>
 
-          ) : (
-            <>
-            <li class="nav-item active">
-              <a class="nav-link" href="/register">
-                Register
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">
-                Login
-              </a>
-            </li>
-            </>
-            )}
-           
+            ) : (
+              <>
+              <li class="nav-item active">
+                <a class="nav-link" href="/register">
+                  Register
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">
+                  Login
+                </a>
+              </li>
+              </>
+              )}
           </ul>
         </div>
       </nav>

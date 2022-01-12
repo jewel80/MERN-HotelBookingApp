@@ -31,6 +31,9 @@ h1{
 .navbar-brand{
   color: white !important;
 }
+.navbar-nav{
+  margin-left: auto !important;
+}
 .btn{
   box-shadow: none !important;
   padding-left: 20px !important;

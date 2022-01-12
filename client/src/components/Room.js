@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Carousel, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+const user = JSON.parse(localStorage.getItem('currentUser'))
 
 function Room({ room, fromdate, todate }) {
   const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ function Room({ room, fromdate, todate }) {
         </p>
 
         <div style={{ float: "right" }}>
-          {fromdate && todate && (
+          {user && fromdate && todate && (
             <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
               <button className="btn btn-dark m-2">Book Now</button>
             </Link>
