@@ -8,18 +8,20 @@ import Homescreen from './screens/Homescreen';
 import Loginscreen from "./screens/Loginscreen";
 import Profilescreen from "./screens/Profilescreen";
 import Registerscreen from "./screens/Registerscreen";
+import Landingscreen from "./screens/Landingscreen";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
       <BrowserRouter>
-        <Route path="/login" component={Loginscreen} />
-        <Route path="/register" component={Registerscreen} />
+        <Route path="/login" exact component={Loginscreen} />
+        <Route path="/register" exact component={Registerscreen} />
         <Route path="/home" exact component={Homescreen} />
-        <Route path="/book/:roomid/:fromdate/:todate" component={Bookingscreen}/>
-        <Route path="/profile" component={Profilescreen}/>
-        <Route path="/admin" component={Adminscreen}/>
+        <Route path="/book/:roomid/:fromdate/:todate" exact component={Bookingscreen}/>
+        <Route path="/profile" exact component={Profilescreen}/>
+        <Route path="/admin" exact component={Adminscreen}/>
+        <Route path="/" exact component={Landingscreen}/>
       </BrowserRouter>
     </div>
   );
