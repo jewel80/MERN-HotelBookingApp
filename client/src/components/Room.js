@@ -1,9 +1,8 @@
-import React, { useState , useEffect } from "react";
-import { Modal, Carousel } from "react-bootstrap";
+import React, { useState } from "react";
+import { Carousel, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Room({ room, fromdate, todate }) {
-  
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -13,7 +12,6 @@ function Room({ room, fromdate, todate }) {
       <div className="col-md-4">
         <img src={room.imageurls[0]} className="img-fluid" />
       </div>
-      
       <div className="col-md-8">
         <h1>{room.name}</h1>
         <p>Parking , Reception , Free Wifi</p>
@@ -29,20 +27,19 @@ function Room({ room, fromdate, todate }) {
         </p>
 
         <div style={{ float: "right" }}>
+          {fromdate && todate && (
+            <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
+              <button className="btn btn-dark m-2">Book Now</button>
+            </Link>
+          )}
 
-          <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
-            <button className="btn btn-dark m-2">Book Now</button>
-          </Link>
-          
-          {(fromdate && todate) && (<Link to={`/book/${room._id}/${fromdate}/${todate}`}>
-            <button className="btn btn-dark m-2">Book Now</button>
-          </Link>)}
-
-          
+          <button className="btn btn-danger m-2" onClick={handleShow}>
+            View Details
+          </button>
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose} size="lg" data--aos='zoom-in'>
+      <Modal show={show} onHide={handleClose} size="lg" data--aos="zoom-in">
         <Modal.Header>
           <Modal.Title>{room.name}</Modal.Title>
         </Modal.Header>

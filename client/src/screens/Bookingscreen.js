@@ -1,10 +1,10 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
-import Swal from "sweetalert2";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import Swal from "sweetalert2";
 import Error from "../components/Error";
 import Loader from "../components/Loader";
 
@@ -15,13 +15,11 @@ function Bookingscreen({ match }) {
   const [error, seterror] = useState(false);
   const [success, setsuccess] = useState(false);
   const [room, setroom] = useState();
-
   const roomid = match.params.roomid;
   const fromdate = moment(match.params.fromdate, "DD-MM-YYYY");
   const todate = moment(match.params.todate, "DD-MM-YYYY");
   const totalDays = moment.duration(todate.diff(fromdate)).asDays() + 1;
   const [totalAmount, settotalAmount] = useState();
-  console.log(totalDays);
   useEffect(async () => {
     try {
       setloading(true);
@@ -38,7 +36,7 @@ function Bookingscreen({ match }) {
     }
   }, []);
 
-  async function onToken(token) {
+  async function tokenHander(token) {
     console.log(token);
     const bookingDetails = {
       token,
@@ -59,7 +57,7 @@ function Bookingscreen({ match }) {
         "Your Room has booked succeessfully",
         "success"
       ).then((result) => {
-        window.location.href = "/profile";
+        window.location.href = "/booking";
       });
     } catch (error) {
       console.log(error);
@@ -67,10 +65,6 @@ function Bookingscreen({ match }) {
       Swal.fire("Oops", "Something went wrong , please try later", "error");
     }
   }
-
- 
-
-  
 
   return (
     <div className="m-5">
@@ -123,13 +117,12 @@ function Bookingscreen({ match }) {
                 <b>Total Amount : {totalAmount} /-</b>
               </h1>
 
-              
               <StripeCheckout
                 amount={totalAmount * 100}
                 shippingAddress
-                token={onToken}
-                stripeKey="pk_test_51IYnC0SIR2AbPxU0TMStZwFUoaDZle9yXVygpVIzg36LdpO8aSG8B9j2C0AikiQw2YyCI8n4faFYQI5uG3Nk5EGQ00lCfjXYvZ"
-                currency="INR"
+                token={tokenHander}
+                stripeKey="pk_test_51KD7JwB44HGfW3FObmlBpkjTfaAsm6kEwz5rkprX8uZxRqqGbfCoYWtiCRiSobPlyUuHwAtL3u5mAhhLegLkrGuf004KO2mmfO"
+                currency="BDT"
               >
                 <button className="btn btn-primary">Pay Now</button>
               </StripeCheckout>
