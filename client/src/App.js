@@ -1,6 +1,8 @@
 import { BrowserRouter, Route } from "react-router-dom";
 import './App.css';
 import Navbar from './components/Navbar';
+import 'antd/dist/antd.css';
+import Adminscreen from "./screens/Adminscreen";
 import Bookingscreen from './screens/Bookingscreen';
 import Homescreen from './screens/Homescreen';
 import Loginscreen from "./screens/Loginscreen";
@@ -17,6 +19,7 @@ function App() {
         <Route path="/home" exact component={Homescreen} />
         <Route path="/book/:roomid/:fromdate/:todate" component={Bookingscreen}/>
         <Route path="/profile" component={Profilescreen}/>
+        <Route path="/admin" component={Adminscreen}/>
       </BrowserRouter>
     </div>
   );
