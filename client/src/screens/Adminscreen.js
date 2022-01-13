@@ -1,11 +1,9 @@
-import React , {useState, useEffect} from "react";
 import { Tabs } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Error from "../components/Error";
 import Loader from "../components/Loader";
-import Success from "../components/Success";
-import { Tag, Divider } from "antd";
 
 
 
@@ -60,7 +58,7 @@ export function Bookings() {
     }
   }, []);
     return (
-        <div className='col-md-11'>
+        <div className='col-md-12'>
             <h1>Bookings</h1>
             {loading ? (<Loader/>) : error ? (<Error/>) : (<div>
 
@@ -114,7 +112,7 @@ export function Rooms() {
     }
   }, []);
     return (
-        <div className='col-md-11'>
+        <div className='col-md-12'>
             <h1>Rooms</h1>
             {loading ? (<Loader/>) : error ? (<Error/>) : (<div>
                    <table className='table table-bordered table-dark'>
@@ -170,7 +168,7 @@ export function Users(){
     <div className='row'>
           {loading && (<Loader/>)}
 
-       <div className="col-md-10">
+       <div className="col-md-12">
        <table className='table table-bordered table-dark'>
            <thead className='bs'>
              <tr>
@@ -229,7 +227,7 @@ export function Addroom() {
             "Your New Room Added succeessfully",
             "success"
           ).then((result) => {
-            window.location.href = "/booking";
+            window.location.href = "/admin";
           });
       } catch (error) {
         setloading(false);
